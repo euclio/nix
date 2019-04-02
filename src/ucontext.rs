@@ -6,8 +6,7 @@ use errno::Errno;
 use std::mem;
 use sys::signal::SigSet;
 
-#[derive(Clone, Copy)]
-#[allow(missing_debug_implementations)]
+#[derive(Debug, Clone, Copy)]
 pub struct UContext {
     context: libc::ucontext_t,
 }

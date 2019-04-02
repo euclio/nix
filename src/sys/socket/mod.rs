@@ -382,7 +382,7 @@ macro_rules! cmsg_space {
 /// let cmsg: CmsgSpace<([RawFd; 3], CmsgSpace<[RawFd; 2]>)> = CmsgSpace::new();
 /// ```
 #[repr(C)]
-#[allow(missing_debug_implementations)]
+#[derive(Debug)]
 pub struct CmsgSpace<T> {
     _hdr: cmsghdr,
     _pad: [align_of_cmsg_data; 0],
@@ -415,7 +415,7 @@ impl CmsgBuffer for Vec<u8> {
     }
 }
 
-#[allow(missing_debug_implementations)] // msghdr isn't Debug
+#[derive(Debug)]
 pub struct RecvMsg<'a> {
     cmsghdr: Option<&'a cmsghdr>,
     pub address: Option<SockAddr>,
@@ -434,7 +434,7 @@ impl<'a> RecvMsg<'a> {
     }
 }
 
-#[allow(missing_debug_implementations)] // msghdr isn't Debug
+#[derive(Debug)]
 pub struct CmsgIterator<'a> {
     /// Control message buffer to decode from. Must adhere to cmsg alignment.
     cmsghdr: Option<&'a cmsghdr>,
@@ -473,7 +473,7 @@ impl<'a> Iterator for CmsgIterator<'a> {
 //  alignment issues.
 //
 //  See https://github.com/nix-rust/nix/issues/999
-#[allow(missing_debug_implementations)]
+#[derive(Debug)]
 pub enum ControlMessageOwned {
     /// Received version of
     /// [`ControlMessage::ScmRights`][#enum.ControlMessage.html#variant.ScmRights]
@@ -674,7 +674,7 @@ impl ControlMessageOwned {
 /// exhaustively pattern-match it.
 ///
 /// [Further reading](http://man7.org/linux/man-pages/man3/cmsg.3.html)
-#[allow(missing_debug_implementations)]
+#[derive(Debug)]
 pub enum ControlMessage<'a> {
     /// A message of type `SCM_RIGHTS`, containing an array of file
     /// descriptors passed between processes.
@@ -737,7 +737,7 @@ pub enum ControlMessage<'a> {
 
 // An opaque structure used to prevent cmsghdr from being a public type
 #[doc(hidden)]
-#[allow(missing_debug_implementations)]
+#[derive(Debug)]
 pub struct UnknownCmsg(cmsghdr, Vec<u8>);
 
 impl<'a> ControlMessage<'a> {

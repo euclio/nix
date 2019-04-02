@@ -17,8 +17,7 @@ use errno::Errno;
 ///
 /// This is returned by `openpty`.  Note that this type does *not* implement `Drop`, so the user
 /// must manually close the file descriptors.
-#[derive(Clone, Copy)]
-#[allow(missing_debug_implementations)]
+#[derive(Debug, Clone, Copy)]
 pub struct OpenptyResult {
     /// The master port in a virtual pty pair
     pub master: RawFd,

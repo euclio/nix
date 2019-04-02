@@ -265,8 +265,7 @@ const SIGNALS: [Signal; 31] = [
 
 pub const NSIG: libc::c_int = 32;
 
-#[derive(Clone, Copy)]
-#[allow(missing_debug_implementations)]
+#[derive(Debug, Clone, Copy)]
 pub struct SignalIterator {
     next: usize,
 }
@@ -358,8 +357,7 @@ libc_enum! {
     }
 }
 
-#[derive(Clone, Copy)]
-#[allow(missing_debug_implementations)]
+#[derive(Debug, Clone, Copy)]
 pub struct SigSet {
     sigset: libc::sigset_t
 }
@@ -471,8 +469,7 @@ pub enum SigHandler {
 }
 
 /// Action to take on receipt of a signal. Corresponds to `sigaction`.
-#[derive(Clone, Copy)]
-#[allow(missing_debug_implementations)]
+#[derive(Debug, Clone, Copy)]
 pub struct SigAction {
     sigaction: libc::sigaction
 }
